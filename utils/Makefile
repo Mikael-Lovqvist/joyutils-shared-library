@@ -67,6 +67,12 @@ jstest.o: jstest.c axbtnmap.h
 
 jstest: jstest.o axbtnmap.o
 
+jsinterface.so: jsinterface.c axbtnmap.o
+	$(CC) --shared -fPIC $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $^ -o $@
+
+jsinterface_py_test: jsinterface.so jsinterface_py_test.py
+	python jsinterface_py_test.py
+
 gencodes: gencodes.c scancodes.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) gencodes.c -o $@
 
